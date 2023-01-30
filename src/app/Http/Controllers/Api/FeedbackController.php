@@ -29,13 +29,13 @@ class FeedbackController extends \App\Http\Controllers\Controller
 
     try {
       $feedback = Feedback::create([
-        'name' => $data['name'],
-        'phone' => $data['phone'],
-        'email' => $data['email'],
-        'text' => $data['text'],
-        'files' => $data['files'],
-        'type' => $data['type'],
-        'extras' => $data['extras']
+        'name' => $data['name'] ?? '',
+        'phone' => $data['phone'] ?? '',
+        'email' => $data['email'] ?? '',
+        'text' => $data['text'] ?? '',
+        'files' => $data['files'] ?? '',
+        'type' => $data['type'] ?? '',
+        'extras' => $data['extras'] ?? ''
       ]);
     }catch(\Exception $e){
       return response()->json($e->getMessage(), 400);
