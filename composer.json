@@ -1,0 +1,60 @@
+{
+  "name": "parabellumkoval/backpack-feedback",
+  "description": "Implement feedback API & CRUD for backpack",
+  "keywords": [
+    "parabellumKoval",
+    "backpack",
+    "laravel",
+    "feedback"
+  ],
+  "homepage": "https://github.com/parabellumkoval/backpack-feedback",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "parabellumKoval",
+      "email": "parabellum.koval@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "laravel/framework": "^8.0|^7.0|^6.0",
+    "backpack/crud": "4.1.*"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+        "Backpack\\Feedback\\": "src",
+        "Backpack\\Feedback\\Database\\Factories\\": "database/factories"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Backpack\\Feedback\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+      "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+      "analyse": "vendor/bin/phpstan analyse",
+      "test": "vendor/bin/pest",
+      "test-coverage": "vendor/bin/pest --coverage",
+      "format": "vendor/bin/pint"
+  },
+  "config": {
+      "sort-packages": true,
+      "allow-plugins": {
+          "pestphp/pest-plugin": true,
+          "phpstan/extension-installer": true
+      }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Backpack\\Feedback\\ServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
