@@ -36,36 +36,46 @@ class FeedbackCrudController extends CrudController
         $this->crud->set('show.setFromDb', false);
         
         $this->crud->addColumn([
-                'name' => 'name',
-                'label' => 'Имя',
-            ]);
+            'name' => 'name',
+            'label' => 'Имя',
+        ]);
+
         $this->crud->addColumn([
-                'name' => 'phone',
-                'label' => 'Телефон',
-            ]);
+            'name' => 'phone',
+            'label' => 'Телефон',
+        ]);
             
         $this->crud->addColumn([
-                'name' => 'email',
-                'label' => 'Email',
-                'type' => 'text'
-            ]);
+            'name' => 'email',
+            'label' => 'Email',
+            'type' => 'text'
+        ]);
+        
         $this->crud->addColumn([
-                'name' => 'theme',
-                'label' => 'Тема',
-            ]);
+            'name' => 'theme',
+            'label' => 'Тема',
+        ]);
+
         $this->crud->addColumn([
-                'name' => 'files',
-                'label' => 'Файлы',
-                'type' => 'upload_multiple'
-            ]);
+            'name' => 'files',
+            'label' => 'Файлы',
+            'type' => 'upload_multiple'
+        ]);
+
         $this->crud->addColumn([
-                'name' => 'message',
-                'label' => 'Сообщение',
-                'type' => 'textarea',
-                'options' => [
-                  'rows' => '7'
-              ]
-            ]);
+            'name' => 'message',
+            'label' => 'Сообщение',
+            'type' => 'textarea',
+            'options' => [
+              'rows' => '7'
+          ]
+        ]);
+        
+        $this->crud->addColumn([
+          'name' => 'info',
+          'label' => 'Информация о заказе',
+          'type' => 'feedback_info'
+        ]);    
     }
     
     protected function setupListOperation()
