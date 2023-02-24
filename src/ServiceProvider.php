@@ -30,6 +30,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 	        __DIR__.'/../database/migrations/' => database_path('migrations')
 	    ], 'migrations');
       
+      // Views
+      $this->publishes([
+          __DIR__.'/resources/views' => resource_path('views'),
+      ], 'views');
     }
 
     public function register()
