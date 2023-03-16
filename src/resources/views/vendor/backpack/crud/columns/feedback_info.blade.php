@@ -2,6 +2,7 @@
   $product = $entry->extras['product'];
 @endphp
 
+@if(isset($product) && !empty($product))
 <div>
   <h3>Товар</h3>
   <div>
@@ -27,3 +28,4 @@
   </div>
   <br>
 </div>
+@endif
