@@ -17,7 +17,7 @@ use Backpack\Feedback\app\Models\Feedback;
 class FeedbackCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -29,12 +29,18 @@ class FeedbackCrudController extends CrudController
         $this->crud->setEntityNameStrings('feedback', 'feedback');
         
         $this->types = array_unique(Feedback::pluck('type', 'type')->toArray());
+        $this->statuses = array_unique(Feedback::pluck('status', 'status')->toArray());
     }
     
     protected function setupShowOperation(){ 
       
         $this->crud->set('show.setFromDb', false);
         
+        $this->crud->addColumn([
+          'name' => 'status',
+          'label' => 'Статус',
+        ]);
+
         $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Имя',
@@ -52,8 +58,8 @@ class FeedbackCrudController extends CrudController
         ]);
         
         $this->crud->addColumn([
-            'name' => 'theme',
-            'label' => 'Тема',
+            'name' => 'type',
+            'label' => 'Тип',
         ]);
 
         $this->crud->addColumn([
@@ -63,7 +69,7 @@ class FeedbackCrudController extends CrudController
         ]);
 
         $this->crud->addColumn([
-            'name' => 'message',
+            'name' => 'text',
             'label' => 'Сообщение',
             'type' => 'textarea',
             'options' => [
@@ -91,12 +97,32 @@ class FeedbackCrudController extends CrudController
         }, function($value){
           $this->crud->addClause('where', 'type', $value);
         });
+
+        $this->crud->addFilter([
+          'name' => 'status',
+          'label' => 'Статус',
+          'type' => 'select2'
+        ], function(){
+          return $this->statuses;
+        }, function($value){
+          $this->crud->addClause('where', 'status', $value);
+        });
         
+
+        $this->crud->addColumn([
+          'name' => 'status',
+          'label' => __('feedback::feedback.status'),
+        ]);
+
+        $this->crud->addColumn([
+          'name' => 'type',
+          'label' => __('feedback::feedback.type'),
+        ]);
       
         $this->crud->addColumn([
-                'name' => 'name',
-                'label' => __('feedback::feedback.name'),
-            ]);
+              'name' => 'name',
+              'label' => __('feedback::feedback.name'),
+          ]);
 
         $this->crud->addColumn([
                 'name' => 'phone',
@@ -106,11 +132,6 @@ class FeedbackCrudController extends CrudController
         $this->crud->addColumn([
                 'name' => 'email',
                 'label' => __('feedback::feedback.email'),
-            ]);
-
-        $this->crud->addColumn([
-                'name' => 'type',
-                'label' => __('feedback::feedback.type'),
             ]);
             
     }
@@ -130,18 +151,34 @@ class FeedbackCrudController extends CrudController
         // $this->setupCreateOperation();
         $this->crud->addFields([
           [
+            'name' => 'status',
+            'label' => __('feedback::feedback.status'),
+            'type' => 'select_from_array',
+            'options' => [
+              'new' => 'Новый',
+              'сanceled' => 'Отменен',
+              'processed' => 'Обработан',
+              'done' => 'Выполнен',
+            ]
+          ],
+          [
             'name' => 'name',
-            'label' => 'Имя',
+            'label' => __('feedback::feedback.name'),
             'type' => 'text'
           ],
           [
             'name' => 'phone',
-            'label' => 'Телефон',
+            'label' => __('feedback::feedback.phone'),
+            'type' => 'text'
+          ],
+          [
+            'name' => 'email',
+            'label' => __('feedback::feedback.email'),
             'type' => 'text'
           ],
           [
             'name' => 'text',
-            'label' => 'Сообщение',
+            'label' => __('feedback::feedback.message'),
             'type' => 'textarea',
             'attributes' => [
               'rows' => '7'

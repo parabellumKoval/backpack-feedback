@@ -3,5 +3,7 @@
 		'name' => 'Name',
 		'phone' => 'Phone',
 		'email' => 'Email',
-		'type' => 'Type'
+		'type' => 'Type',
+		'status' => 'Status',
+		'message' => 'Message'
 	];

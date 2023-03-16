@@ -1,5 +1,5 @@
 @php
-  $product = $entry->extras['product'];
+  $product = $entry && isset($entry->extras) && isset($entry->extras['product'])? $entry->extras['product']: null;
 @endphp
 
 @if(isset($product) && !empty($product))

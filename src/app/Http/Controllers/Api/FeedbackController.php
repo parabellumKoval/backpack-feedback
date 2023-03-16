@@ -29,10 +29,10 @@ class FeedbackController extends \App\Http\Controllers\Controller
 
     try {
       $feedback = Feedback::create([
-        'name' => $data['name'] ?? '',
-        'phone' => $data['phone'] ?? '',
-        'email' => $data['email'] ?? '',
-        'text' => $data['text'] ?? '',
+        'name' => strip_tags($data['name']) ?? '',
+        'phone' => strip_tags($data['phone']) ?? '',
+        'email' => strip_tags($data['email']) ?? '',
+        'text' => strip_tags($data['text']) ?? '',
         'files' => $data['files'] ?? '',
         'type' => $data['type'] ?? '',
         'extras' => $data['extras'] ?? ''
