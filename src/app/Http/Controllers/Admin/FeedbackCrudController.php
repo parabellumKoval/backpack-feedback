@@ -37,6 +37,12 @@ class FeedbackCrudController extends CrudController
         $this->crud->set('show.setFromDb', false);
         
         $this->crud->addColumn([
+          'name' => 'created_at',
+          'type'  => 'datetime',
+          'label' => __('feedback::feedback.date')
+        ]);
+
+        $this->crud->addColumn([
           'name' => 'status',
           'label' => 'Статус',
         ]);
@@ -107,7 +113,12 @@ class FeedbackCrudController extends CrudController
         }, function($value){
           $this->crud->addClause('where', 'status', $value);
         });
-        
+
+        $this->crud->addColumn([
+          'name' => 'created_at',
+          'type'  => 'datetime',
+          'label' => __('feedback::feedback.date')
+        ]);
 
         $this->crud->addColumn([
           'name' => 'status',

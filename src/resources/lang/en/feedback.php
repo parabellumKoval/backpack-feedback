@@ -5,5 +5,6 @@
 		'email' => 'Email',
 		'type' => 'Type',
 		'status' => 'Status',
-		'message' => 'Message'
+		'message' => 'Message',
+		'date' => 'Дата'
 	];
