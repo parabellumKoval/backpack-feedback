@@ -23,6 +23,8 @@ class CreateAkFeedbackTable extends Migration
             $table->text('text')->nullable();
             $table->json('files')->nullable();
             $table->json('extras')->nullable();
+            $table->string('status', 80)->default('new');
+            $table->string('country_code', 2)->nullable()->index();
             
             $table->timestamps();
         });
